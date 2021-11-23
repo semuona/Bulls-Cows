@@ -49,6 +49,7 @@ button {
   color: black;
   transition: all 0.2s ease-in-out;
   position: relative;
+  cursor:pointer;
 }
 button:hover::before {
   content: "";

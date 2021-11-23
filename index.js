@@ -17,10 +17,11 @@ class Game {
 
   startNow() {
     if (this.level === "easy") {
-      console.log("EASY TO MEDIUM : ", this.number);
+      console.log("Level 'EASY' number: ", this.number); // Printing secret number in the console
       while (this.number !== this.guess) {
-        if (this.name === null) break;
-        this.guess = prompt(this.message); // WHILE GUESSED NUMBER IS NOT CORRECT, PRINT GENERATED MESSAGE OR SHOW COWS AND BULLS
+        // WHILE GUESSED NUMBER IS NOT CORRECT, PRINT GENERATED MESSAGE OR SHOW COWS AND BULLS
+        if (this.name === null) break; // Break if pressed 'cancel' without entering the name
+        this.guess = prompt(this.message);
         if (this.guess === null) break; // IF GUESS IS NOT A STRING OR PRESSING CANCEL BUTTON
         if (this.guess.toLowerCase() === "hint") {
           //Making HINT case insensitive
@@ -37,7 +38,7 @@ class Game {
       if (this.name !== null) alert(this.message);
     }
     if (this.level === "medium") {
-      console.log("EASY TO MEDIUM : ", this.number);
+      console.log("Level 'MEDIUM' number: ", this.number);
       let i = 0;
       while (this.number !== this.guess && i < this.maxGuess) {
         // running while limit of Max Guesses will be reached
@@ -66,7 +67,7 @@ class Game {
       this.number = Math.floor(Math.random() * 10000)
         .toString()
         .padStart(4, "0");
-      console.log("GO PRO : ", this.number);
+      console.log("Level 'HARD' number: ", this.number);
       let i = 5; // GIVING 5 LESS GUESSES THEN IN MEDIUM LEVEL
       while (this.number !== this.guess && i < this.maxGuess) {
         if (this.name === null) break;
@@ -93,6 +94,7 @@ class Game {
     }
   }
   generateNumber() {
+    // FOR LEVEL EASY AND MEDIUM
     //Generating random number from 1 -9 with unique digits
     let array = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     let currentIndex = array.length,
@@ -128,19 +130,15 @@ class Game {
 
     if (this.guess.length !== 4)
       return "Insert 4 digit number or type: 'Hint' ;) "; // MUST BE 4 DIGITS
-    if ((this.level = "easy")) {
-      if (bulls === 4) {
-        return `${this.name}, you got 4 BULLS! Congratulations!`; // GAME HAS BEEN WON
-      }
-      if (bulls === 4) {
-        return `${this.name}, you got 4 BULLS! Congratulations!`; // GAME HAS BEEN WON
-      }
-      if (bulls === 0 && cows === 0) {
-        // printing TEMP (random message if all guessed digits were wrong)
-        return temp[Math.floor(Math.random() * temp.length)];
-      }
-      return `Hint: BULLS : ${bulls}, COWS : ${cows}`;
+
+    if (bulls === 4) {
+      return `${this.name}, you got 4 BULLS! Congratulations!`; // GAME HAS BEEN WON
     }
+    if (bulls === 0 && cows === 0) {
+      // printing TEMP (random message if all guessed digits were wrong)
+      return temp[Math.floor(Math.random() * temp.length)];
+    }
+    return `Hint: BULLS : ${bulls}, COWS : ${cows}`;
   }
 }
 
