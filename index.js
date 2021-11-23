@@ -5,7 +5,7 @@ class Game {
     this.guess = ""; // PLAYERS INPUT
     this.level = level; // LEVEL: EASY, MEDIUM, HARD
     this.maxGuess = 16; // FOR LEVELS MEDIUM TO HARD
-    this.message = `Hello ${this.name}! Let me tell you about Cows & Bulls game rules. \n You will be guessing 4-digit secret number. The digits are all different (from 1 to 9). \n If the matching digits are in their right positions, they are "BULLS", if in different positions, they are "COWS". \n If you need help, reveal 1 random digit of secret number by typing: "HINT". Good luck! `;
+    this.message = `Hello ${this.name}! Let me tell you about Cows & Bulls game rules. \n You will be guessing 4-digit secret number.\n If the matching digits are in their right positions, they are "BULLS", if in different positions, they are "COWS". \n If you need help, reveal 1 random digit of secret number by typing: "HINT". Good luck! `;
     this.reply = [
       "You're AMAZING!",
       `Hooray ${this.name}!`,
@@ -40,10 +40,11 @@ class Game {
       console.log("EASY TO MEDIUM : ", this.number);
       let i = 0;
       while (this.number !== this.guess && i < this.maxGuess) {
+        // running while limit of Max Guesses will be reached
         if (this.name === null) break;
         i++;
         if (i === this.maxGuess) {
-          this.message = "GAME OVER :(";
+          this.message = "GAME OVER :("; // MAX guesses were reached
           break;
         }
         this.guess = prompt(this.message);
@@ -127,22 +128,20 @@ class Game {
 
     if (this.guess.length !== 4)
       return "Insert 4 digit number or type: 'Hint' ;) "; // MUST BE 4 DIGITS
-    if (bulls === 4) {
-      return `${this.name}, you got 4 BULLS! Congratulations!`; // GAME IS WON
+    if ((this.level = "easy")) {
+      if (bulls === 4) {
+        return `${this.name}, you got 4 BULLS! Congratulations!`; // GAME HAS BEEN WON
+      }
+      if (bulls === 4) {
+        return `${this.name}, you got 4 BULLS! Congratulations!`; // GAME HAS BEEN WON
+      }
+      if (bulls === 0 && cows === 0) {
+        // printing TEMP (random message if all guessed digits were wrong)
+        return temp[Math.floor(Math.random() * temp.length)];
+      }
+      return `Hint: BULLS : ${bulls}, COWS : ${cows}`;
     }
-    if (bulls === 0 && cows === 0) {
-      // printing TEMP (random message if all guessed digits were wrong)
-      return temp[Math.floor(Math.random() * temp.length)];
-    }
-    return `Hint: BULLS : ${bulls}, COWS : ${cows}`;
   }
-  /*   getHint(string, num) {
-    let hint = string.toLowerCase();
-    if (hint === "hint") {
-      let cowHint = num[Math.floor(Math.random() * num.length)];
-      console.log(`number ${cowHint} belongs to secret number ;)`);
-    }
-  } */
 }
 
 //const cowsAndBulls = new Game(prompt("What is your name?"));
